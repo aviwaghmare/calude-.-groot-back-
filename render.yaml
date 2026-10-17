@@ -1,0 +1,17 @@
+# Optional: Render "Blueprint". Lets Render create the service from this file.
+services:
+  - type: web
+    name: groot-chatbot-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: MIN_SCORE
+        value: "50"
+      - key: ALLOWED_ORIGINS
+        value: "*"
